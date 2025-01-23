@@ -267,7 +267,7 @@ ul {list-style-type: none;}
     margin: 0;
     padding: 0;
 }
-.logo-dark {max-width: 80%;}
+.logo-dark {max-width: 60%;}
 
 .navbar-standard #menu > li{
     display: inline-block;
