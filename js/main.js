@@ -59,10 +59,16 @@
     setActiveNav();
     toggleBackToTop();
 
+    let scrollTimeout;
     $window.on('scroll', function () {
-        toggleNavbarState();
-        setActiveNav();
-        toggleBackToTop();
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(function () {
+            toggleNavbarState();
+            setActiveNav();
+            toggleBackToTop();
+        });
     });
 
     $navLinks.on('click', function (e) {
