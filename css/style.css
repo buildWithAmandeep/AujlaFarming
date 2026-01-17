@@ -642,7 +642,7 @@ body {
     }
 
     .glass-nav .navbar-nav {
-        padding: 1rem 0;
+        padding: 1rem 1.25rem;
     }
 
     .glass-nav .navbar-nav .nav-link {
@@ -650,6 +650,7 @@ body {
         border-bottom: 1px solid rgba(26, 43, 23, 0.08);
         font-size: .92rem;
         letter-spacing: .04em;
+        text-align: right;
     }
 
     .glass-nav .navbar-nav .nav-link:last-child {
@@ -658,7 +659,7 @@ body {
 
     .navbar-expand-lg .navbar-nav {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
         width: 100%;
     }
 
@@ -1283,11 +1284,12 @@ body {
     }
 
     .glass-nav .container {
-        margin: 0;
+        margin: 0 1.25rem;
+        padding: 1rem 1.25rem;
     }
 
     .brand-logo {
-        height: 62px;
+        height: 68px;
     }
 
     .floating-brand {
@@ -1301,6 +1303,11 @@ body {
 
     .glass-nav .navbar-brand {
         margin-right: .75rem;
+        padding: .5rem 0;
+    }
+
+    .glass-nav {
+        padding: .75rem 0;
     }
 }
 
@@ -1311,5 +1318,18 @@ body {
 
     .service-card__image {
         height: 200px;
+    }
+
+    .glass-nav .container {
+        padding: .85rem 1rem;
+        margin: 0 1rem;
+    }
+
+    .glass-nav .navbar-nav {
+        padding: 1rem;
+    }
+
+    .brand-logo {
+        height: 64px;
     }
 }
