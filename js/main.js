@@ -16,26 +16,68 @@
     new WOW().init();
 
 
-    // Sticky Navbar
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.sticky-top').addClass('shadow-sm').css('top', '0px');
+    const $window = $(window);
+    const $body = $('html, body');
+    const $navbar = $('.glass-nav');
+    const $navLinks = $('.glass-nav .navbar-nav a[href^="#"]');
+    const $sections = $('section[id]');
+    const navOffset = 90;
+
+    const toggleNavbarState = () => {
+        if ($window.scrollTop() > 120) {
+            $navbar.addClass('nav-scrolled shadow-sm');
         } else {
-            $('.sticky-top').removeClass('shadow-sm').css('top', '-100px');
+            $navbar.removeClass('nav-scrolled shadow-sm');
         }
-    });
-    
-    
-    // Back to top button
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
+    };
+
+    const setActiveNav = () => {
+        const currentPos = $window.scrollTop() + navOffset + 10;
+        let currentId = 'home';
+
+        $sections.each(function () {
+            const $section = $(this);
+            if (currentPos >= $section.offset().top && currentPos < $section.offset().top + $section.outerHeight()) {
+                currentId = $section.attr('id');
+                return false;
+            }
+        });
+
+        $navLinks.removeClass('active');
+        $navLinks.filter(`[href="#${currentId}"]`).addClass('active');
+    };
+
+    const toggleBackToTop = () => {
+        if ($window.scrollTop() > 300) {
             $('.back-to-top').fadeIn('slow');
         } else {
             $('.back-to-top').fadeOut('slow');
         }
+    };
+
+    toggleNavbarState();
+    setActiveNav();
+    toggleBackToTop();
+
+    $window.on('scroll', function () {
+        toggleNavbarState();
+        setActiveNav();
+        toggleBackToTop();
     });
+
+    $navLinks.on('click', function (e) {
+        const target = $($(this).attr('href'));
+        if (target.length) {
+            e.preventDefault();
+            $body.animate({
+                scrollTop: target.offset().top - navOffset
+            }, 900, 'easeInOutExpo');
+            $('.navbar-collapse').removeClass('show');
+        }
+    });
+
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $body.animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -52,13 +94,11 @@
         autoplay: true,
         smartSpeed: 1000,
         items: 1,
-        dots: false,
+        dots: true,
         loop: true,
-        nav: true,
-        navText : [
-            '<i class="bi bi-chevron-left"></i>',
-            '<i class="bi bi-chevron-right"></i>'
-        ]
+        nav: false,
+        margin: 30,
+        autoHeight: true
     });
 
     
